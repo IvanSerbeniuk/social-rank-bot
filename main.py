@@ -1,6 +1,7 @@
 import telegram
 from telegram.ext import Updater, CommandHandler
 import logging
+from decouple import config
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -8,11 +9,8 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 logger = logging.getLogger(__name__)
 
-# Insert your bot token here
-TOKEN = '5724159742:AAFtIdXqoBKi0yHFbBbq443FT9DXJQsF6yU'
-
 # Create a new bot instance
-bot = telegram.Bot(token=TOKEN)
+bot = telegram.Bot(config('token'))
 
 points = {}
 

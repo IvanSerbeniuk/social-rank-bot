@@ -1,8 +1,9 @@
 import telegram
 from telegram.ext import Updater, CommandHandler
+from decouple import config
 
 # Replace YOUR_BOT_TOKEN with your bot's token
-bot = telegram.Bot(token='5724159742:AAFtIdXqoBKi0yHFbBbq443FT9DXJQsF6yU')
+bot = telegram.Bot(config('token'))
 
 # Define a dictionary to store the points for each participant
 points = {}
