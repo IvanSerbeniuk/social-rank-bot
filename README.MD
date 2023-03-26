@@ -19,8 +19,10 @@ Finally, an Updater object is created and the command handlers are attached to i
 
 
 ## Ideas
-- Implement calculator.  Example: /addpoints  @Orgazmovich  **1000-7** or **1000+7**...
-- Make commands implement only to members of the chat Example: /addpoints  **@Username(user that exist in chat)** 10
+- Implement calculator.  
+    > *Example*: /addpoints  @Orgazmovich  **1000-7** or **1000+7**...
+- Make commands implement only to members of the chat 
+  >*Example*: /addpoints  **@Username(user that exist in chat)** 10
 - command /help
 - [random jokes](https://api-ninjas.com/api/jokes)
 - def maint() + if __name__ ...
