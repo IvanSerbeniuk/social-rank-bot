@@ -9,7 +9,7 @@ The following libraries are imported: (Attach to each documentation)
 - CommandHandler: This class is used to handle Telegram commands.
 - decouple.config: This library is used to store sensitive data such as the bot token in a .env file.
 After importing the necessary libraries, the bot's token is retrieved from the .env file and a Bot object is created. A dictionary called points is also created to store the points for each participant.<br><br>
-    >Note: Script has old library 'python-telegram-bot==13.12'. Doesn't work with latest version python-telegram-bot<=13.15<br>
+    **Note**: Script has old library 'python-telegram-bot==13.12'. Doesn't work with latest version python-telegram-bot<=13.15<br>
 
 The add_points and subtract_points functions are defined to handle the /addpoints and /subtractpoints commands, respectively. Both functions first check if the user sending the command is an administrator before performing the requested action. If the user is an administrator, the function gets the user to add/subtract points from and the number of points to add/subtract, and updates the points dictionary accordingly. A confirmation message is then sent to the chat. If the user is not an administrator, an error message is sent.
 
