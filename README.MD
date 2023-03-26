@@ -32,3 +32,4 @@ Finally, an Updater object is created and the command handlers are attached to i
 - check logs
 - ?delete command if User is not administrator
 
+Изначально можно присвоить отрицательное значение -2. А должно с 0 начинать
