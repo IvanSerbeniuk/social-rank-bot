@@ -67,7 +67,7 @@ def error(update, context):
 
 # Define a function that sets up the bot and starts polling for new messages
 def main():
-    updater = Updater(TOKEN, use_context=True)
+    updater = Updater(config('token'), use_context=True)
     dp = updater.dispatcher
 
     # Add handlers for the add_points and subtract_points commands

@@ -8,19 +8,32 @@ bot = telegram.Bot(config('token'))
 # Define a dictionary to store the points for each participant
 points = {}
 
+GROUP_OWNER_USERNAME = 'Validolchikk'
+
 # Define a function to handle the /addpoints command
 def add_points(update, context):
-    # Get the user to add points to
-    user = context.args[0]
-    # Get the number of points to add
-    amount = int(context.args[1])
-    # Add the points to the user's total
-    if user in points:
-        points[user] += amount
+    user_id = update.message.from_user.id
+    chat_id = update.message.chat.id
+    # chat_member = bot.get_chat_member(chat_id, user_id)
+
+    chat_info = bot.get_chat(chat_id)
+    is_admin = (chat_info.get_member(user_id).status in ['creator', 'administrator'])
+
+    if is_admin:
+        # Get the user to add points to
+        user = context.args[0]
+
+        # Get the number of points to add
+        amount = int(context.args[1])
+        # Add the points to the user's total
+        if user in points:
+            points[user] += amount
+        else:
+            points[user] = amount
+        # Send a confirmation message
+        update.message.reply_text(f"{user} now has {points[user]} points.")
     else:
-        points[user] = amount
-    # Send a confirmation message
-    update.message.reply_text(f"{user} now has {points[user]} points.")
+        update.message.reply_text(f"You are not an administrator")
 
 
 # Define a function to handle the /subtractpoints command
@@ -42,7 +55,7 @@ def subtract_points(update, context):
 
 
 # Create an Updater object and attach the command handlers
-updater = Updater(token='5724159742:AAFtIdXqoBKi0yHFbBbq443FT9DXJQsF6yU', use_context=True)
+updater = Updater(config('token'), use_context=True)
 updater.dispatcher.add_handler(CommandHandler('addpoints', add_points))
 updater.dispatcher.add_handler(CommandHandler('subtractpoints', subtract_points))
 
