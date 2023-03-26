@@ -60,19 +60,16 @@ def subtract_points(update, context):
         user = context.args[0]
         # Get the number of points to subtract
         amount = int(context.args[1])
-        if int(amount):
         # Subtract the points from the user's total
-            if user in points:
-                points[user] -= amount
-                if points[user] < 0:
-                    points[user] = 0
-                # Send a confirmation message
-                update.message.reply_text(f"{user} now has {points[user]} points.")
-            else:
-                # Send an error message if the user doesn't have any points yet
-                update.message.reply_text(f"{user} doesn't have any points yet.")
+        if user in points:
+            points[user] -= amount
+            if points[user] < 0:
+                points[user] = 0
+            # Send a confirmation message
+            update.message.reply_text(f"{user} now has {points[user]} points.")
         else:
-            update.message.reply_text(f"points have to be a number")
+            # Send an error message if the user doesn't have any points yet
+            update.message.reply_text(f"{user} doesn't have any points yet.")
     else:
         update.message.reply_text(f"You are not an administrator")
 
