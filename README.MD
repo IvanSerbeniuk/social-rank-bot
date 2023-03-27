@@ -18,17 +18,5 @@ An error handler function is also defined to handle any errors that occur while 
 Finally, an Updater object is created and the command handlers are attached to it. The bot is started using the start_polling() method and runs indefinitely until interrupted by the user.
 
 
-## Ideas
-- Implement calculator
-    > *Example*: /addpoints  @Orgazmovich  **1000-7** or **1000+7**...
-- Make commands implement only to members of the chat 
-    >*Example*: /addpoints  **@Username(user that exist in chat)** 10
-- command /help
-- [random jokes](https://api-ninjas.com/api/jokes)
-- def maint() + if __name__ ...
-- function to check to user/admin points
-- quize game with points
-- function /start with greetings
-- check logs
-- ?delete command if User is not administrator
-- when particular user writes message -100 points
+
+
