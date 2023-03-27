@@ -1,4 +1,4 @@
-## This code creates a Telegram bot that allows administrators to add and subtract points from members of a group chat.
+<!-- ## This code creates a Telegram bot that allows administrators to add and subtract points from members of a group chat.
 
 
 
@@ -16,7 +16,27 @@ The add_points and subtract_points functions are defined to handle the /addpoint
 An error handler function is also defined to handle any errors that occur while the bot is running.
 
 Finally, an Updater object is created and the command handlers are attached to it. The bot is started using the start_polling() method and runs indefinitely until interrupted by the user.
+ -->
 
 
+# Points Bot
+A simple Telegram bot that keeps track of points for different users in a chat.
+
+## Dependencies
+python-decouple<br>
+python-telegram-bot
+
+
+## Usage
+To use the bot, create a Telegram bot using the BotFather and obtain an API token.<br>
+
+Set the API token in a .env file in the same directory as the script using the following format:
+> token=(bot_token)
+
+To run the bot, simply execute the script:
+> python points_bot.py
+## Commands
+- /addpoints <user> <points>: Adds points to the specified user's total. Only admins can use this command.
+- /subtractpoints <user> <points>: Subtracts points from the specified user's total. Only admins can use this command.
 
 
