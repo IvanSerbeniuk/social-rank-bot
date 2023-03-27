@@ -19,3 +19,5 @@
  [], 'entities': [{'offset': 0, 'type': 'bot_command', 'length': 15}], 'photo': [], 'message_id': 44, 'delete_chat_photo': False, 'caption_entities': [], 'gr
 oup_chat_created': False, 'text': '/subtractpoints', 'from': {'is_bot': False, 'language_code': 'ru', 'id': 472612583, 'first_name': 'Ivan', 'username': 'Val
 idolchikk'}}}" caused error "list index out of range"
+
+
