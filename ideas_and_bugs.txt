@@ -21,3 +21,6 @@ oup_chat_created': False, 'text': '/subtractpoints', 'from': {'is_bot': False, '
 idolchikk'}}}" caused error "list index out of range"
 
 
+///
+
+
