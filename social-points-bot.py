@@ -3,75 +3,69 @@ from telegram.ext import Updater, CommandHandler
 from decouple import config
 import logging
 
+
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
 
 logger = logging.getLogger(__name__)
 
-# Replace YOUR_BOT_TOKEN with your bot's token
 bot = telegram.Bot(config('token'))
+
+# Gets user and chat id
+def get_id_chat_user(update):
+    user_id = update.message.from_user.id
+    chat_id = update.message.chat.id
+    return user_id, chat_id
+
 
 # Define a dictionary to store the points for each participant
 points = {}
 
+def Admin_validation(user_id, chat_id):
+    chat_info = bot.get_chat(chat_id)
+    return chat_info.get_member(user_id).status in ['creator', 'administrator']
+
+def Number_validation(numb, update):
+    try:
+        return int(numb)
+    except:
+        update.message.reply_text(f"points have to be a number")
+        return 0
+
+def Update_points(user, update, amount):
+    if user in points:
+        points[user] += amount
+    else:
+        points[user] = amount
+    update.message.reply_text(f"{user} now has {points[user]} points.")
+
 # Define a function to handle the /addpoints command
 def add_points(update, context):
-    user_id = update.message.from_user.id
-    chat_id = update.message.chat.id
-    # chat_member = bot.get_chat_member(chat_id, user_id)
+    user_id, chat_id = get_id_chat_user(update)
 
-    chat_info = bot.get_chat(chat_id)
-    is_admin = (chat_info.get_member(user_id).status in ['creator', 'administrator'])
+    is_admin = Admin_validation(user_id, chat_id)
 
-    if is_admin:
-        # Get the user to add points to
-        user = context.args[0]
+    if not is_admin:
+        update.message.reply_text("You are not an administrator")
+        return
+        
+    user = context.args[0]
+    amount = Number_validation(context.args[1], update)
 
-        # Get the number of points to add
-        amount = int(context.args[1])
-        # Add the points to the user's total
-        if user in points:
-            points[user] += amount
-        else:
-            points[user] = amount
-        # Send a confirmation message
-        update.message.reply_text(f"{user} now has {points[user]} points.")
-    else:
-        update.message.reply_text(f"You are not an administrator")
+    # Add the points to the user's total
+    Update_points(user, update, amount)
+
+    
+# Define a function to handle the /subtractpoints command
+def subtract_points(update, context):
+    context.args[1] = '-' + context.args[1]
+    add_points(update, context)
 
 
 # Define a function to handle errors
 def error(update, context):
     logger.warning('Update "%s" caused error "%s"', update, context.error)
-
-
-# Define a function to handle the /subtractpoints command
-def subtract_points(update, context):
-    user_id = update.message.from_user.id
-    chat_id = update.message.chat.id
-    # chat_member = bot.get_chat_member(chat_id, user_id)
-
-    chat_info = bot.get_chat(chat_id)
-    is_admin = (chat_info.get_member(user_id).status in ['creator', 'administrator'])
-
-    if is_admin:
-        # Get the user to subtract points from
-        user = context.args[0]
-        # Get the number of points to subtract
-        amount = int(context.args[1])
-        # Subtract the points from the user's total
-        if user in points:
-            points[user] -= amount
-            if points[user] < 0:
-                points[user] = 0
-            # Send a confirmation message
-            update.message.reply_text(f"{user} now has {points[user]} points.")
-        else:
-            # Send an error message if the user doesn't have any points yet
-            update.message.reply_text(f"{user} doesn't have any points yet.")
-    else:
-        update.message.reply_text(f"You are not an administrator")
 
 
 # Create an Updater object and attach the command handlers
