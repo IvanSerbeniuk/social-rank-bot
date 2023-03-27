@@ -31,4 +31,4 @@ Finally, an Updater object is created and the command handlers are attached to i
 - function /start with greetings
 - check logs
 - ?delete command if User is not administrator
-
+- when particular user writes message -100 points
